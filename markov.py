@@ -39,7 +39,25 @@ def make_chains(text_string):
 
     chains = {}
 
-    # your code goes here
+    words = text_string.split()
+
+    # tuple_list = []
+
+    # This code doesn't account for the last tuple pair of ("I", "am?").
+
+    for index in range(len(words) - 2):
+
+        key = (words[index], words[index + 1])
+        value = words[index + 2]
+
+        # tuple_list.append(key)
+        # if key in chains:
+        #     chains[key].append(value)
+        # else:
+        #     chains[key] = [value]
+
+        chains[key] = chains.get(key, [])
+        chains[key].append(value)
 
     return chains
 
@@ -58,10 +76,10 @@ input_path = "green-eggs.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
-print input_text
+
 # Get a Markov chain
 chains = make_chains(input_text)
-
+print chains
 # Produce random text
 random_text = make_text(chains)
 
