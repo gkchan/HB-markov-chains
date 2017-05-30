@@ -56,6 +56,7 @@ def make_chains(text_string):
         # else:
         #     chains[key] = [value]
 
+        print chains.get(key, [])
         chains[key].append(value)
 
     return chains
