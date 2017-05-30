@@ -56,7 +56,7 @@ def make_chains(text_string):
         # else:
         #     chains[key] = [value]
 
-        print chains.get(key, [])
+        chains[key] = chains.get(key, [])
         chains[key].append(value)
 
     return chains
@@ -65,9 +65,21 @@ def make_chains(text_string):
 def make_text(chains):
     """Returns text from chains."""
 
-    words = []
+    first_word, second_word = choice(chains.keys())
+    words = [first_word, second_word]
 
-    # your code goes here
+    i = 0
+
+    while True:
+        try:
+
+            key = (words[i], words[i + 1])
+            value = chains[key]
+            words.append(choice(value))
+            i += 1
+
+        except KeyError:
+            break
 
     return " ".join(words)
 
@@ -79,7 +91,7 @@ input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
 chains = make_chains(input_text)
-print chains
+
 # Produce random text
 random_text = make_text(chains)
 
