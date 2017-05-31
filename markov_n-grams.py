@@ -55,6 +55,7 @@ def make_chains(text_string, n = 2):
     return chains
 
 
+
 def make_text(chains, n = 2):
     """Returns text from chains."""
 
@@ -73,12 +74,8 @@ def make_text(chains, n = 2):
 
     words[0] = words[0].title()
 
-    # end_punctuation = ["?", ".", "!"]
-
-    # if words[-1][-1] in end_punctuation:
-
     return " ".join(words)
-
+       
 
 input_path = argv[1]
 n = int(argv[2])
