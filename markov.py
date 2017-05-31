@@ -65,18 +65,16 @@ def make_chains(text_string):
 def make_text(chains):
     """Returns text from chains."""
 
-    first_word, second_word = choice(chains.keys())
-    words = [first_word, second_word]
-
-    i = 0
+    # picks a random consecutive pair of words to start our string
+    words = list(choice(chains.keys()))
 
     while True:
         try:
 
-            key = (words[i], words[i + 1])
+            key = (words[-2], words[-1])
             value = chains[key]
             words.append(choice(value))
-            i += 1
+        
 
         except KeyError:
             break
