@@ -15,7 +15,7 @@ def open_and_read_file(file_path):
         return text_file.read().strip()
 
 
-def make_chains(text_string):
+def make_chains(text_string, n = 2):
     """Takes input text as string; returns dictionary of markov chains.
 
     A chain will be a key that consists of a tuple of (word1, word2)
@@ -41,20 +41,13 @@ def make_chains(text_string):
 
     words = text_string.split()
 
-    # tuple_list = []
+    # This code doesn't create a key for last words.
 
-    # This code doesn't account for the last tuple pair of ("I", "am?").
-
-    for index in range(len(words) - 2):
-
-        key = (words[index], words[index + 1])
-        value = words[index + 2]
-
-        # tuple_list.append(key)
-        # if key in chains:
-        #     chains[key].append(value)
-        # else:
-        #     chains[key] = [value]
+    for index in range(len(words) - n):
+        # key = (words[index], words[index + 1])
+        # value = words[index + 2]
+        key = tuple(words[index:index + n])
+        value = words[index + n]
 
         chains[key] = chains.get(key, [])
         chains[key].append(value)
@@ -62,7 +55,7 @@ def make_chains(text_string):
     return chains
 
 
-def make_text(chains):
+def make_text(chains, n = 2):
     """Returns text from chains."""
 
     # picks a random consecutive pair of words to start our string
@@ -71,10 +64,9 @@ def make_text(chains):
     while True:
         try:
 
-            key = (words[-2], words[-1])
+            key = tuple(words[-n:])
             value = chains[key]
             words.append(choice(value))
-        
 
         except KeyError:
             break
@@ -83,14 +75,15 @@ def make_text(chains):
 
 
 input_path = argv[1]
+n = int(argv[2])
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
-chains = make_chains(input_text)
+chains = make_chains(input_text, n)
 
 # Produce random text
-random_text = make_text(chains)
+random_text = make_text(chains, n)
 
 print random_text
