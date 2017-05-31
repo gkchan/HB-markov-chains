@@ -71,6 +71,12 @@ def make_text(chains, n = 2):
         except KeyError:
             break
 
+    words[0] = words[0].title()
+
+    # end_punctuation = ["?", ".", "!"]
+
+    # if words[-1][-1] in end_punctuation:
+
     return " ".join(words)
 
 
