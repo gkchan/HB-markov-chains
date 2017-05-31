@@ -58,8 +58,7 @@ def make_chains(text_string, chains, ngram=2):
     # This code doesn't create a key for last words.
 
     for index in range(len(words) - ngram):
-        # key = (words[index], words[index + 1])
-        # value = words[index + 2]
+
         key = tuple(words[index:index + ngram])
         value = words[index + ngram]
 
